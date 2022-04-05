@@ -50,24 +50,24 @@ App = {
             const investment = await App.investmentsContract.investments(i)
             const investmentId = investment[0]
             const investmentTitle = investment[1]
-            const investmentDescription = investment[2]
-            const investmentDone = investment[3]
-            const investmentCreated = investment[4]
-            console.log(investmentDone);
+            const investmentAmount = investment[2]
+            const investmentTime = investment[3]
+            const investmentDone = investment[4]
+            const investmentCreated = investment[5]
 
             let investmentElement = `
                 <div class="card bg-dark rounded-0 mb-2" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span> ${investmentTitle} </span>
                         <div class="form-check form-switch">
-                            <span> ${investmentDescription} ETH </span>
+                            <span> ${investmentAmount} ETH </span>
                             <input class="form-check-input" data-id="${investmentId}" type="checkbox" ${investmentDone && "checked"} onchange="App.toggleDone(this)"/>
                         </div>
                     </div> 
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-8" align="left">
-                                <span> You have made an investment for 2 year. </span>
+                                <span> You have made an investment for ${investmentTime} years. </span>
                                 <p class="text-muted">Transaction was created ${new Date(investmentCreated * 1000).toLocaleString()}</p>
                             </div>
                             <div class="col-md-4" align="right">
@@ -83,8 +83,8 @@ App = {
 
         document.querySelector('#investmentsList').innerHTML = html;
     },
-    createInvestment: async (title, description) => {
-        const result = await App.investmentsContract.createInvestment(title, description, { 
+    createInvestment: async (title, time, amount) => {
+        const result = await App.investmentsContract.createInvestment(title, time, amount, { 
             from: App.account
         })
         // console.log(result.logs[0].args)

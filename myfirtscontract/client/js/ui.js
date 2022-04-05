@@ -14,8 +14,8 @@ investmentForm.addEventListener("submit", (e) => {
   } else {
     // console.log(startup);
     // console.log(investmentForm["amount"].value);
-    App.createInvestment(startup, investmentForm["amount"].value);
-    // App.createInvestment(investmentForm["title"].value, investmentForm["description"].value);
+    App.createInvestment(startup, investmentForm["time"].value, investmentForm["amount"].value);
+    transaction();
   }
 });
 
