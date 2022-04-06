@@ -5,10 +5,6 @@ contract InvestmentsContract {
 
     uint public investmentCounter = 0;
 
-    // constructor () {
-    //     createInvestment("Mi primera tarea de ejemplo", "Tengo que hacer algo");
-    // }
-
     event InvestmentCreated(
         uint id,
         string title,
