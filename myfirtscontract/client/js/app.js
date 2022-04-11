@@ -67,11 +67,11 @@ App = {
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-8" align="left">
-                                <span> You have made an investment for ${investmentTime} years. </span>
-                                <p class="text-muted">Transaction was created ${new Date(investmentCreated * 1000).toLocaleString()}</p>
+                                <span> Has hecho una inversión por ${investmentTime} años. </span>
+                                <p class="text-muted">Se creó la transacción ${new Date(investmentCreated * 1000).toLocaleString()}</p>
                             </div>
                             <div class="col-md-4" align="right">
-                                <button type="button" id="investmentButton" class="btn btn-success" data-id="${investmentId}" onclick="App.toggleDone(this)"> Withdraw investment? </button>
+                                <button type="button" id="investmentButton" class="btn btn-success" data-id="${investmentId}" onclick="App.toggleDone(this)"> ¿Retirar la inversión? </button>
                             </div>
                         </div>
                     </div>
