@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container py-5">
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-md-4">
                 <div class="card card-body rounded mb-4 bg-dark" style="padding: 5%; border-radius: 5%; box-shadow: 10px 5px 5px black;">
                     <h1> DVCApp </h1>
@@ -40,11 +40,11 @@
                     <div class="form-group">
                         <select class="form-control bg-dark text-white rounded border mt-4" id="startupsSelect" onchange="info()">
                             <option value="" disabled selected hidden> Seleccione una Startup </option>
-                            <option value="Connex"> Connex </option>
-                            <option value="Sooper"> Sooper </option>
-                            <option value="Lincer"> Lincer </option>
-                            <option value="Lotis"> Lotis </option>
-                            <option value="Veriphy"> Veriphy </option>
+                            <option value="Connex"> Soluciones MedX </option>
+                            <option value="Sooper"> Arte Cuerdas </option>
+                            <option value="Lincer"> Casa Platino </option>
+                            <option value="Lotis"> Desenfadado </option>
+                            <option value="Veriphy"> Pequeñas Espinas </option>
                         </select>
                     </div>
                     <input type="number" name="amount" id="amount" placeholder="¿Cuántos ETH quieres invertir?" class="form-control bg-dark text-white rounded border mt-4" min="0" step="0.1">
@@ -54,9 +54,98 @@
             </div>
             <div class="col-md-8">
                 <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
-                    <h3> Inversiones </h3>
+                    <h3> Mis inversiones </h3>
                 </div>
                 <div id ="investmentsList"></div> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                    <h3> Startups </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h3> Soluciones MedX </h3>
+                        </div>
+                        <div class="col-md-2">
+                            <span style="font-weight: bold; float: right;"> Capital necesario: </span>
+                            <br>
+                            <span style="font-weight:lighter; float: right;"> 10 ETH </span> 
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <p align="justify"> 
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                Aliquam aliquet, ligula id tempor sollicitudin, ex est feugiat ligula, ut hendrerit ipsum orci a magna. 
+                                Fusce aliquam semper sem, ultrices aliquet urna semper at. Duis porta venenatis convallis. 
+                                Vivamus dui quam, facilisis vel magna at, pharetra finibus tortor. 
+                                Donec eu fringilla orci, sed viverra sem. Donec porttitor cursus dolor, eu auctor ipsum faucibus et. 
+                                Maecenas non pretium risus, nec tincidunt metus. Quisque id consequat quam, ac tempus massa.
+                                Vestibulum tincidunt finibus eros, efficitur tincidunt dui dictum et. 
+                                Pellentesque ligula leo, pharetra a nisi quis, convallis pulvinar augue. 
+                                Suspendisse consectetur risus ultrices dignissim mattis. 
+                                Mauris ut mattis leo, nec dignissim erat. 
+                                Aenean vitae eros eu turpis porta tincidunt. 
+                                Morbi diam enim, posuere ultricies lorem a, varius suscipit dui. 
+                                Aliquam aliquam volutpat congue.
+                            </p>
+                        </div>
+                        <div class="col-md-2">
+                            <center>
+                                <button type="button" class="btn btn-success" disabled> Invertir </button>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h3> Arte Cuerdas </h3>
+                        </div>
+                        <div class="col-md-2">
+                            <span style="font-weight: bold; float: right;"> Capital necesario: </span>
+                            <br>
+                            <span style="font-weight:lighter; float: right;"> 15 ETH </span> 
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <p align="justify"> 
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                Aliquam aliquet, ligula id tempor sollicitudin, ex est feugiat ligula, ut hendrerit ipsum orci a magna. 
+                                Fusce aliquam semper sem, ultrices aliquet urna semper at. Duis porta venenatis convallis. 
+                                Vivamus dui quam, facilisis vel magna at, pharetra finibus tortor. 
+                                Donec eu fringilla orci, sed viverra sem. Donec porttitor cursus dolor, eu auctor ipsum faucibus et. 
+                                Maecenas non pretium risus, nec tincidunt metus. Quisque id consequat quam, ac tempus massa.
+                                Vestibulum tincidunt finibus eros, efficitur tincidunt dui dictum et. 
+                                Pellentesque ligula leo, pharetra a nisi quis, convallis pulvinar augue. 
+                                Suspendisse consectetur risus ultrices dignissim mattis. 
+                                Mauris ut mattis leo, nec dignissim erat. 
+                                Aenean vitae eros eu turpis porta tincidunt. 
+                                Morbi diam enim, posuere ultricies lorem a, varius suscipit dui. 
+                                Aliquam aliquam volutpat congue.
+                            </p>
+                        </div>
+                        <div class="col-md-2">
+                            <center>
+                                <button type="button" class="btn btn-success" disabled> Invertir </button>
+                            </center>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
