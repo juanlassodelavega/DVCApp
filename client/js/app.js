@@ -66,9 +66,12 @@ App = {
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-9">
                                     <span> Has hecho una inversión por ${investmentTime} años. </span>
                                     <p class="text-muted">Se creó la transacción ${new Date(investmentCreated * 1000).toLocaleString()}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-info" style="float:right" onclick="showTransaction()"> Ver transacción </button>
                                 </div>
                             </div>
                         </div>
@@ -97,4 +100,8 @@ App = {
 
         location.reload();
     }
+}
+
+function showTransaction() {
+    window.open('./docs/recibo.pdf', '_blank');
 }
