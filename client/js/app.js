@@ -56,22 +56,20 @@ App = {
             const investmentCreated = investment[5]
 
             let investmentElement = `
-                <div class="card bg-dark rounded-0 mb-2" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <span> ${investmentTitle} </span>
-                        <div class="form-check form-switch">
-                            <span> ${investmentAmount} ETH </span>
-                            <input class="form-check-input" data-id="${investmentId}" type="checkbox" ${investmentDone && "checked"} onchange="App.toggleDone(this)"/>
-                        </div>
-                    </div> 
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8" align="left">
-                                <span> Has hecho una inversión por ${investmentTime} años. </span>
-                                <p class="text-muted">Se creó la transacción ${new Date(investmentCreated * 1000).toLocaleString()}</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3> ${investmentTitle} </h3>
+                                </div>
                             </div>
-                            <div class="col-md-4" align="right">
-                                <button type="button" id="investmentButton" class="btn btn-success" data-id="${investmentId}" onclick="App.toggleDone(this)"> ¿Retirar la inversión? </button>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span> Has hecho una inversión por ${investmentTime} años. </span>
+                                    <p class="text-muted">Se creó la transacción ${new Date(investmentCreated * 1000).toLocaleString()}</p>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -26,3 +26,11 @@ body {
 .form {
   margin: auto;
 }
+
+.amount:valid {
+  border: 1px solid #007BFF;
+}
+
+.time:valid {
+  border: 1px solid #007BFF;
+}

@@ -38,7 +38,7 @@
                 <form class="card card-body rounded bg-dark" id="investmentForm" style="padding: 5%; border-radius: 5%; box-shadow: 10px 5px 5px black;">
                     <h4> Haga una Transacción </h4>
                     <div class="form-group">
-                        <select class="form-control bg-dark text-white rounded border mt-4" id="startupsSelect" onchange="info()">
+                        <select class="form-control bg-dark text-white rounded mt-4" id="startupsSelect" onchange="info()">
                             <option value="" disabled selected hidden> Seleccione una Startup </option>
                             <option value="Connex"> Soluciones MedX </option>
                             <option value="Sooper"> Arte Cuerdas </option>
@@ -47,8 +47,8 @@
                             <option value="Veriphy"> Pequeñas Espinas </option>
                         </select>
                     </div>
-                    <input type="number" name="amount" id="amount" placeholder="¿Cuántos ETH quieres invertir?" class="form-control bg-dark text-white rounded border mt-4" min="0" step="0.1">
-                    <input type="number" name="time" id="time" placeholder="¿Por cuánto tiempo quieres hacer la inversión?" class="form-control bg-dark text-white rounded border my-4" min="0">
+                    <input type="number" name="amount" id="amount" placeholder="¿Cuántos ETH quieres invertir?" class="form-control bg-dark text-white rounded mt-4 amount" min="0" step="0.1" required>
+                    <input type="number" name="time" id="time" placeholder="¿Por cuánto tiempo quieres hacer la inversión?" class="form-control bg-dark text-white rounded my-4 time" min="0" required>
                     <button class="btn btn-primary"> Guardar </button>
                 </form>
             </div>
