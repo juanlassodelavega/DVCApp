@@ -48,11 +48,11 @@ App = {
 
         for (let i = 1; i <= investmentCounterNumber; i++) {
             const investment = await App.investmentsContract.investments(i)
-            const investmentId = investment[0]
+            // const investmentId = investment[0]
             const investmentTitle = investment[1]
-            const investmentAmount = investment[2]
+            // const investmentAmount = investment[2]
             const investmentTime = investment[3]
-            const investmentDone = investment[4]
+            // const investmentDone = investment[4]
             const investmentCreated = investment[5]
 
             let investmentElement = `
