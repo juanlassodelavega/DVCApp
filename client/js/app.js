@@ -42,7 +42,6 @@ App = {
     renderInvestments: async () => {
         const investmentCounter = await App.investmentsContract.investmentCounter()
         const investmentCounterNumber = investmentCounter.toNumber()
-        // console.log(investmentCounterNumber)
 
         let html = '';
 
@@ -88,7 +87,6 @@ App = {
         const result = await App.investmentsContract.createInvestment(title, time, amount, { 
             from: App.account
         })
-        // console.log(result.logs[0].args)
         location.reload();
     },
     toggleDone: async (element) => {
