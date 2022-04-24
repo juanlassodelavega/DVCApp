@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +11,7 @@
     <title>DVCApp</title>
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
 </head>
+
 <body>
     <div class="container py-5">
         <div class="row mb-4">
@@ -20,23 +22,35 @@
                     <span style="margin-top: 1%; font-weight: bold;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet2" viewBox="0 0 16 16">
                             <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"></path>
-                        </svg> 
-                        Cartera 
+                        </svg>
+                        Cartera
                     </span>
                     <span id="account" style="font-weight:lighter;"></span>
                     <span style="margin-top: 1%; font-weight: bold;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
-                            <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
-                            <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"/>
-                            <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
-                          </svg>
+                            <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
+                            <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z" />
+                            <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z" />
+                            <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z" />
+                        </svg>
                         Saldo
                     </span>
                     <span id="balance" style="font-weight:lighter;"></span>
                 </div>
                 <div class="card card-body rounded bg-dark" style="padding: 5%; border-radius: 5%; box-shadow: 10px 5px 5px black;">
-                    <h4> Soluciones MedX </h4>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h4> Soluciones MedX </h4>
+                        </div>
+                        <div class="col-md-2">
+                            <a onclick="edit()" style="text-decoration:none;color:white;cursor:pointer;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
@@ -45,19 +59,21 @@
                         </div>
                         <span style="font-weight: bold;"> Descripción: </span>
                         <span style="font-weight:lighter;" align="justify">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Aliquam aliquet, ligula id tempor sollicitudin, ex est feugiat ligula, ut hendrerit ipsum orci a magna. 
-                            Fusce aliquam semper sem, ultrices aliquet urna semper at. Duis porta venenatis convallis. 
-                            Vivamus dui quam, facilisis vel magna at, pharetra finibus tortor. 
-                            Donec eu fringilla orci, sed viverra sem. Donec porttitor cursus dolor, eu auctor ipsum faucibus et. 
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Aliquam aliquet, ligula id tempor sollicitudin, ex est feugiat ligula, ut hendrerit ipsum
+                            orci a magna.
+                            Fusce aliquam semper sem, ultrices aliquet urna semper at. Duis porta venenatis convallis.
+                            Vivamus dui quam, facilisis vel magna at, pharetra finibus tortor.
+                            Donec eu fringilla orci, sed viverra sem. Donec porttitor cursus dolor, eu auctor ipsum
+                            faucibus et.
                             Maecenas non pretium risus, nec tincidunt metus. Quisque id consequat quam, ac tempus massa.
-                            Vestibulum tincidunt finibus eros, efficitur tincidunt dui dictum et. 
-                            Pellentesque ligula leo, pharetra a nisi quis, convallis pulvinar augue. 
-                            Suspendisse consectetur risus ultrices dignissim mattis. 
-                            Mauris ut mattis leo, nec dignissim erat. 
-                            Aenean vitae eros eu turpis porta tincidunt. 
-                            Morbi diam enim, posuere ultricies lorem a, varius suscipit dui. 
-                            Aliquam aliquam volutpat congue. 
+                            Vestibulum tincidunt finibus eros, efficitur tincidunt dui dictum et.
+                            Pellentesque ligula leo, pharetra a nisi quis, convallis pulvinar augue.
+                            Suspendisse consectetur risus ultrices dignissim mattis.
+                            Mauris ut mattis leo, nec dignissim erat.
+                            Aenean vitae eros eu turpis porta tincidunt.
+                            Morbi diam enim, posuere ultricies lorem a, varius suscipit dui.
+                            Aliquam aliquam volutpat congue.
                         </span>
                     </div>
                 </div>
@@ -71,15 +87,19 @@
                         <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <h3 style="font-weight:lighter;"> Juan Lasso de la Vega Ruiz-Fornells</h3>
+                                    <h3 style="font-weight:lighter;"> Juan Lasso de la Vega Ruiz-Fornells </h3>
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn btn-danger" disabled> Cancelar </button>
+                                    <button type="button" class="btn btn-danger" onclick="cancel()" disabled> Cancelar </button>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <p>
+                                    Se realizó una inversión de 1ETH el día 10 de abril de 2022, por 3 años.
+                                    <br>
+                                    La inversión finalizará el día 10 de abril de 2025.
+                                    <!-- <br>
                                     <span style="font-weight: bold;"> Inversión: </span>
                                     <span style="font-weight:lighter;"> 1ETH </span>
                                     <br>
@@ -87,7 +107,7 @@
                                     <span style="font-weight:lighter;"> 10/04/2022 </span>
                                     <br>
                                     <span style="font-weight: bold;"> Hasta: </span>
-                                    <span style="font-weight:lighter;"> 10/04/2025 </span>
+                                    <span style="font-weight:lighter;"> 10/04/2025 </span> -->
                                 </p>
                             </div>
                         </div>
@@ -97,5 +117,14 @@
         </div>
     </div>
 
+
+    <!-- Scripts -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="./libs/@truffle/contract/dist/truffle-contract.min.js"></script>
+    <!-- <script src="./js/app.js"></script>
+    <script src="./js/ui.js"></script> -->
+    <script src="./js/investors.js"></script>
 </body>
+
 </html>
