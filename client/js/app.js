@@ -70,7 +70,7 @@ App = {
                                     <p class="text-muted">Se creó la transacción ${new Date(investmentCreated * 1000).toLocaleString()}</p>
                                 </div>
                                 <div class="col-md-3">
-                                    <button type="button" class="btn btn-info" style="float:right" onclick="showTransaction()"> Ver transacción </button>
+                                    <button type="button" class="btn btn-info" style="float:right" onclick="showReceipt()"> Ver transacción </button>
                                 </div>
                             </div>
                         </div>
@@ -100,6 +100,6 @@ App = {
     }
 }
 
-function showTransaction() {
-    window.open('./docs/recibo.pdf', '_blank');
+function showReceipt() {
+    window.open('./docs/receipt.pdf', '_blank');
 }
