@@ -19,7 +19,7 @@ https://trufflesuite.com/ganache/
 
 <br>
 
-### Environment configuration ⚙️
+### Configuración del entorno ⚙️
 
 *Instalación de dependencias:*
 ```bash
