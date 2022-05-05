@@ -5,7 +5,7 @@
 
 <br>
 
-### Requisitos 📋
+## Requisitos 📋
 
 *Instalación de Truffle:*
 ```bash
@@ -24,7 +24,7 @@ https://metamask.io/download/
 
 <br>
 
-### Configuración del entorno ⚙️
+## Configuración del entorno ⚙️
 
 *Instalación de dependencias:*
 ```bash
@@ -43,15 +43,15 @@ npm run dev
 
 <br>
 
-### Construido con 🛠️
+## Construido con 🛠️
 
 - [Truffle Suite](https://trufflesuite.com) - Framework de desarrollo para Blockchain
 - [Bootstrap](https://getbootstrap.com) - Biblioteca de estilos web
 - [Ganache](https://trufflesuite.com/ganache/) - Blockchain de Ethereum
 - [MetaMask](https://metamask.io) - Wallet de criptomonedas
 
-<hr>
+<br>
 
-### Autor ✒️
+## Autor ✒️
 
 Juan Lasso de la Vega - [@lassete6898](https://github.com/lassete6898)
