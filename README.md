@@ -50,8 +50,8 @@ npm run dev
 - [Ganache](https://trufflesuite.com/ganache/) - Blockchain de Ethereum
 - [MetaMask](https://metamask.io) - Wallet de criptomonedas
 
-<br>
+<hr>
 
-## Autor ✒️
+### Autor ✒️
 
 Juan Lasso de la Vega - [@lassete6898](https://github.com/lassete6898)
