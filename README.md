@@ -7,14 +7,19 @@
 
 ### Requisitos 📋
 
-*Truffle installation:*
+*Instalación de Truffle:*
 ```bash
 npm install -g truffle
 ```
 
-*Ganache installation:*
+*Instalación de Ganache:*
 ```bash
 https://trufflesuite.com/ganache/
+```
+
+*Instalación de MetaMask:*
+```bash
+https://metamask.io/download/
 ```
 
 <br>
@@ -35,3 +40,12 @@ truffle migrate --reset
 ```bash
 npm run dev
 ```
+
+<br>
+
+### Construido con 🛠️
+
+- [Truffle Suite](https://trufflesuite.com) - Framework de desarrollo para Blockchain
+- [Bootstrap](https://getbootstrap.com) - Biblioteca de estilos web
+- [Ganache](https://trufflesuite.com/ganache/) - Blockchain de Ethereum
+- [MetaMask](https://metamask.io) - Wallet de criptomonedas
