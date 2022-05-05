@@ -49,3 +49,9 @@ npm run dev
 - [Bootstrap](https://getbootstrap.com) - Biblioteca de estilos web
 - [Ganache](https://trufflesuite.com/ganache/) - Blockchain de Ethereum
 - [MetaMask](https://metamask.io) - Wallet de criptomonedas
+
+<br>
+
+## Autor ✒️
+
+Juan Lasso de la Vega - [@lassete6898](https://github.com/lassete6898)
