@@ -3,6 +3,8 @@
 <br>
 *Repositorio dedicado al desarrollo de una prueba de concepto, para mi Trabajo de Fin de Grado.*
 
+<br>
+
 ### Requisitos 📋
 
 *Truffle installation:*
@@ -13,6 +15,8 @@ npm install -g truffle
 *Ganache installation:*
 <br>
 <a>https://trufflesuite.com/ganache/</a>
+
+<br>
 
 ### Environment configuration ⚙️
 
