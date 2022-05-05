@@ -13,8 +13,9 @@ npm install -g truffle
 ```
 
 *Ganache installation:*
-<br>
-<a>https://trufflesuite.com/ganache/</a>
+```bash
+https://trufflesuite.com/ganache/
+```
 
 <br>
 
