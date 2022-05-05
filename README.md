@@ -11,6 +11,7 @@ npm install -g truffle
 ```
 
 *Ganache installation:*
+<br>
 <a>https://trufflesuite.com/ganache/</a>
 
 ### Environment configuration ⚙️
