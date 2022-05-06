@@ -49,7 +49,7 @@ App = {
             const investment = await App.investmentsContract.investments(i)
             // const investmentId = investment[0]
             const investmentTitle = investment[1]
-            // const investmentAmount = investment[2]
+            const investmentAmount = investment[2]
             const investmentTime = investment[3]
             // const investmentDone = investment[4]
             const investmentCreated = investment[5]
@@ -59,8 +59,13 @@ App = {
                     <div class="col-md-12">
                         <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-10">
                                     <h3> ${investmentTitle} </h3>
+                                </div>
+                                <div class="col-md-2">
+                                    <span style="font-weight: bold; float: right;"> Inversión: </span>
+                                    <br>
+                                    <span style="font-weight:lighter; float: right;"> ${investmentAmount} ETH </span>
                                 </div>
                             </div>
                             <hr>
