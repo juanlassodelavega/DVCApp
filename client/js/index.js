@@ -4,10 +4,16 @@ window.onload = function() {
 
 function login() {
     var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
 
-    if (username != "admin") {
+    if (username == "inversor") {
         window.location = "investments.html";
-    } else {
+    } else if (username == "startup") {
         window.location = "investors.html";
+    } else if (username == "admin") {
+        window.location = "admin.html";
+    } else {
+        // alert("¡ERROR!")
+        swal("Credenciales incorrectas", "El usuario o la contraseña son incorrectos, intenta de nuevo.", "error");
     }
 }
