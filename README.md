@@ -49,6 +49,7 @@ npm run dev
 - [Bootstrap](https://getbootstrap.com) - Biblioteca de estilos web
 - [Ganache](https://trufflesuite.com/ganache/) - Blockchain de Ethereum
 - [MetaMask](https://metamask.io) - Wallet de criptomonedas
+- [Chart.js](https://www.chartjs.org/) - Biblioteca para la visualización de datos
 
 <br>
 
