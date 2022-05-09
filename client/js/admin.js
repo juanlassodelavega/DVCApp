@@ -6,6 +6,8 @@ window.onload = function() {
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dateTime = date+' '+time;
     document.getElementById("date").innerHTML = dateTime;
+
+    document.getElementById("ip").innerHTML = (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255));;
 }
 
 function reload() {
