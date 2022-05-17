@@ -60,19 +60,19 @@ App = {
                         <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <h3> ${investmentTitle} </h3>
+                                    <h3 id="investmentTitle"> ${investmentTitle} </h3>
                                 </div>
                                 <div class="col-md-2">
                                     <span style="font-weight: bold; float: right;"> Inversión: </span>
                                     <br>
-                                    <span style="font-weight:lighter; float: right;"> ${investmentAmount} ETH </span>
+                                    <span id="investmentAmount" style="font-weight:lighter; float: right;"> ${investmentAmount} ETH </span>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-md-9">
-                                    <span> Has hecho una inversión por ${investmentTime} años. </span>
-                                    <p class="text-muted">Se creó la transacción ${new Date(investmentCreated * 1000).toLocaleString()}</p>
+                                    <span id="info"> Has hecho una inversión por ${investmentTime} años. </span>
+                                    <p id="date" class="text-muted">Se creó la transacción ${new Date(investmentCreated * 1000).toLocaleString()}</p>
                                 </div>
                                 <div class="col-md-3">
                                     <button type="button" class="btn btn-info" style="float:right" onclick="showReceipt()"> Ver transacción </button>
@@ -107,4 +107,17 @@ App = {
 
 function showReceipt() {
     window.open('./docs/receipt.pdf', '_blank');
+    // var title = document.getElementById('title').innerText;
+    // var investmentTitle = document.getElementById("investmentTitle").innerHTML;
+    // var investmentAmount = document.getElementById("investmentAmount").innerHTML;
+    // var info = document.getElementById("info").innerHTML;
+    // var date = document.getElementById("date").innerHTML;
+    
+    // const doc = new jsPDF();
+    // doc.text(title, 10, 10);
+    // doc.text(investmentTitle, 10, 30)
+    // doc.text(investmentAmount, 40, 30)
+    // doc.text(info, 20, 40)
+    // doc.text(date, 20, 50)
+    // doc.save("receipt.pdf");
 }
