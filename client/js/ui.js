@@ -1,26 +1,32 @@
 const investmentForm = document.querySelector("#investmentForm");
 
+// Inicializamos las funciones contenidas en app.js
 document.addEventListener("DOMContentLoaded", () => {
   App.init();
 });
 
 investmentForm.addEventListener("submit", (e) => {
+  // Cancela el evento si es cancelable
   e.preventDefault();
 
   var startup = document.getElementById("startupsSelect").value;
 
+  // Comprobamos que se ha seleccionado una startup
   if (startup == "") {
     alert("Seleccione una Startup");
   } else {
+    // Se crea una inversión con los datos del formulario
     App.createInvestment(startup, investmentForm["time"].value, investmentForm["amount"].value);
     transaction();
   }
 });
 
+// Obtenemos todas las wallets al cargar la página
 window.onload = function () {
   getAccount();
 };
 
+// Funcion que permite realizar una transacción
 async function transaction() {
   var amount = document.getElementById("amount").value*1000000000000000000;
   var parsedAmount = "0x" + amount.toString(16);
@@ -38,8 +44,10 @@ async function transaction() {
   });
 }
 
+// Almacenamos las wallets en un array
 let accounts = [];
 
+// Permite obtener las cuentas
 async function getAccount() {
   accounts = await ethereum.request({ method: "eth_requestAccounts" });
 }

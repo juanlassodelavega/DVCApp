@@ -8,6 +8,7 @@ App = {
         App.render()
         await App.renderInvestments()
     },
+    // Comprueba si es un navegador Ethereum
     loadEthereum: async () => {
         if (window.ethereum) {
             App.web3Provider = window.ethereum
@@ -18,27 +19,31 @@ App = {
             console.log('No ethereum browser is installed. Try it installing Metamask')
         }
     },
+    // Carga todas las wallets conectadas al navegador
     loadAccount: async () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-        App.account = accounts[0]
+        App.account = accounts[0]   // Almacenamos la cuenta
         var balance = await window.ethereum.request({ method: 'eth_getBalance', params: [App.account, 'latest'] })
         var parsedBalance = balance/1000000000000000000;
-        App.balance = parsedBalance
+        App.balance = parsedBalance // Almacenamos el balance de la cuenta
         console.log(App.balance)
     },
+    // Permite cargar todos los contratos almacenados en la blockchain
     loadContracts: async () => {
         const res = await fetch("InvestmentsContract.json")                       //Traigo el contrato en formato JSON
         const investmentsContractJSON = await res.json()                          //Traigo el contrato en formato JSON
         
         App.contracts.investmentsContract = TruffleContract(investmentsContractJSON)    // Convierto el JSON a Truffle
-        App.contracts.investmentsContract.setProvider(App.web3Provider)           // Conectamos con MetaMask
+        App.contracts.investmentsContract.setProvider(App.web3Provider)                 // Conectamos con MetaMask
         App.investmentsContract = await App.contracts.investmentsContract.deployed()    // Usamos el contrato desplegado
     },
+    // Muestra al usuario su cuenta y su balance
     render: () => {
         console.log(App.account)
         document.getElementById('account').innerText = App.account
         document.getElementById('balance').innerHTML = App.balance + ' ETH';
     },
+    // Muestra al usuario todas las inversiones que ha realizado
     renderInvestments: async () => {
         const investmentCounter = await App.investmentsContract.investmentCounter()
         const investmentCounterNumber = investmentCounter.toNumber()
@@ -88,12 +93,14 @@ App = {
 
         document.querySelector('#investmentsList').innerHTML = html;
     },
+    // Permite crear una inversión, llamando al Smart Contract
     createInvestment: async (title, time, amount) => {
         const result = await App.investmentsContract.createInvestment(title, time, amount, { 
             from: App.account
         })
         location.reload();
     },
+    // Permite marcar como completada una inversión (no implementado)
     toggleDone: async (element) => {
         const investmentId = element.dataset.id;
 
@@ -105,6 +112,7 @@ App = {
     }
 }
 
+// Permite mostrar al usuario el recibo de la transacción (no implementado por completo)
 function showReceipt() {
     window.open('./docs/receipt.pdf', '_blank');
     // var title = document.getElementById('title').innerText;
