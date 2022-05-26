@@ -34,3 +34,94 @@ body {
 .time:valid {
   border: 1px solid #007BFF;
 }
+
+.admin {
+  padding: 5%;
+  border-radius: 5%;
+  box-shadow: 10px 5px 5px black;
+}
+
+.users {
+  padding: 5%;
+  border-radius: 5%;
+  box-shadow: 10px 5px 5px black;
+}
+
+.admin #ip-text {
+  margin-top: 1%;
+  font-weight: bold;
+}
+
+.admin #ip {
+  font-weight:lighter;
+}
+
+.graph {
+  border-radius: 5%;
+  box-shadow: 10px 5px 5px black;
+}
+
+#logout {
+  float: right;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+.reload {
+  cursor: pointer;
+}
+
+#wallet-text {
+  margin-top: 1%;
+  font-weight: bold;
+}
+
+#account {
+  font-weight: lighter;
+}
+
+#balance-text {
+  margin-top: 1%;
+  font-weight: bold;
+}
+
+#balance {
+  font-weight: lighter;
+}
+
+#investmentForm {
+  padding: 5%; 
+  border-radius: 5%; 
+  box-shadow: 10px 5px 5px black;
+}
+
+#edit {
+  float: right;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  margin-right: 10%;
+}
+
+#eth-text {
+  font-weight: bold;
+  float: right;
+}
+
+#eth {
+  font-weight: lighter;
+  float: right;
+}
+
+.invest {
+  float: right;
+}
+
+#info-text {
+  font-weight: bold;
+}
+
+#info {
+  font-weight: lighter;
+}
