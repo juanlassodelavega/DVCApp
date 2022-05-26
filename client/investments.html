@@ -15,18 +15,18 @@
     <div class="container py-5">
         <div class="row mb-4">
             <div class="col-md-4">
-                <div class="card card-body rounded mb-4 bg-dark" style="padding: 5%; border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                <div class="users card card-body rounded mb-4 bg-dark">
                     <h1 id="title"> DVCApp </h1>
                     <h6 class="text-muted"> Aplicación de Venture Capital Descentralizada </h6>
                     <hr>
-                    <span style="margin-top: 1%; font-weight: bold;">
+                    <span id="wallet-text">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet2" viewBox="0 0 16 16">
                             <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"></path>
                         </svg> 
                         Cartera 
                     </span>
-                    <span id="account" style="font-weight:lighter;"></span>
-                    <span style="margin-top: 1%; font-weight: bold;">
+                    <span id="account"></span>
+                    <span id="balance-text">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
                             <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
@@ -35,9 +35,9 @@
                           </svg>
                         Saldo
                     </span>
-                    <span id="balance" style="font-weight:lighter;"></span>
+                    <span id="balance"></span>
                 </div>
-                <form class="card card-body rounded bg-dark" id="investmentForm" style="padding: 5%; border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                <form class="card card-body rounded bg-dark" id="investmentForm">
                     <h4> Haga una Transacción </h4>
                     <hr>
                     <div class="form-group">
@@ -56,19 +56,19 @@
                 </form>
             </div>
             <div class="col-md-8">
-                <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                <div class="graph card card-body rounded mb-2 bg-dark">
                     <div class="row">
                         <div class="col-md-10">
                             <h1> Mis inversiones </h1>
                         </div>
                         <div class="col-md-2">
-                            <a href="index.html" style="float:right;cursor:pointer;text-decoration:none;color:white;">
+                            <a href="index.html" id="logout">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
                                     <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
                                 </svg>
                             </a>
-                            <a onclick="edit()" style="float:right;cursor:pointer;text-decoration:none;color:white;margin-right:10%;">
+                            <a onclick="edit()" id="edit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                                     <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -83,7 +83,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                <div class="graph card card-body rounded mb-2 bg-dark">
                     <h1> Startups </h1>
                     <h6 class="text-muted"> ¡Analice las startups en invierta! </h6>
                 </div>
@@ -91,15 +91,15 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                <div class="graph card card-body rounded mb-2 bg-dark">
                     <div class="row">
                         <div class="col-md-10">
                             <h3> Heura Foods </h3>
                         </div>
                         <div class="col-md-2">
-                            <span style="font-weight: bold; float: right;"> Capital necesario: </span>
+                            <span id="eth-text"> Capital necesario: </span>
                             <br>
-                            <span style="font-weight:lighter; float: right;"> 10 ETH </span> 
+                            <span id="eth"> 10 ETH </span> 
                         </div>
                     </div>
                     <hr>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="col-md-2">
                             <center>
-                                <button type="button" class="btn btn-success" onclick="invest(1)" style="float:right;"> Invertir </button>
+                                <button type="button" class="invest btn btn-success" onclick="invest(1)"> Invertir </button>
                             </center>
                         </div>
                     </div>
@@ -120,15 +120,15 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                <div class="graph card card-body rounded mb-2 bg-dark">
                     <div class="row">
                         <div class="col-md-10">
                             <h3> ThePowerMBA </h3>
                         </div>
                         <div class="col-md-2">
-                            <span style="font-weight: bold; float: right;"> Capital necesario: </span>
+                            <span id="eth-text"> Capital necesario: </span>
                             <br>
-                            <span style="font-weight:lighter; float: right;"> 15 ETH </span> 
+                            <span id="eth"> 15 ETH </span> 
                         </div>
                     </div>
                     <hr>
@@ -141,7 +141,7 @@
                         </div>
                         <div class="col-md-2">
                             <center>
-                                <button type="button" class="btn btn-success" onclick="invest(2)" style="float:right;"> Invertir </button>
+                                <button type="button" class="invest btn btn-success" onclick="invest(2)"> Invertir </button>
                             </center>
                         </div>
                     </div>
@@ -150,15 +150,15 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                <div class="graph card card-body rounded mb-2 bg-dark">
                     <div class="row">
                         <div class="col-md-10">
                             <h3> Wallbox </h3>
                         </div>
                         <div class="col-md-2">
-                            <span style="font-weight: bold; float: right;"> Capital necesario: </span>
+                            <span id="eth-text"> Capital necesario: </span>
                             <br>
-                            <span style="font-weight:lighter; float: right;"> 20 ETH </span> 
+                            <span id="eth"> 20 ETH </span> 
                         </div>
                     </div>
                     <hr>
@@ -171,7 +171,7 @@
                         </div>
                         <div class="col-md-2">
                             <center>
-                                <button type="button" class="btn btn-success" onclick="invest(3)" style="float:right;"> Invertir </button>
+                                <button type="button" class="invest btn btn-success" onclick="invest(3)"> Invertir </button>
                             </center>
                         </div>
                     </div>
@@ -180,15 +180,15 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                <div class="graph card card-body rounded mb-2 bg-dark">
                     <div class="row">
                         <div class="col-md-10">
                             <h3> Colvin </h3>
                         </div>
                         <div class="col-md-2">
-                            <span style="font-weight: bold; float: right;"> Capital necesario: </span>
+                            <span id="eth-text"> Capital necesario: </span>
                             <br>
-                            <span style="font-weight:lighter; float: right;"> 25 ETH </span> 
+                            <span id="eth"> 25 ETH </span> 
                         </div>
                     </div>
                     <hr>
@@ -200,7 +200,7 @@
                         </div>
                         <div class="col-md-2">
                             <center>
-                                <button type="button" class="btn btn-success" onclick="invest(4)" style="float:right;"> Invertir </button>
+                                <button type="button" class="invest btn btn-success" onclick="invest(4)"> Invertir </button>
                             </center>
                         </div>
                     </div>
@@ -209,15 +209,15 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                <div class="graph card card-body rounded mb-2 bg-dark">
                     <div class="row">
                         <div class="col-md-10">
                             <h3> Freshly Cosmetics </h3>
                         </div>
                         <div class="col-md-2">
-                            <span style="font-weight: bold; float: right;"> Capital necesario: </span>
+                            <span id="eth-text"> Capital necesario: </span>
                             <br>
-                            <span style="font-weight:lighter; float: right;"> 30 ETH </span> 
+                            <span id="eth"> 30 ETH </span> 
                         </div>
                     </div>
                     <hr>
@@ -229,7 +229,7 @@
                         </div>
                         <div class="col-md-2">
                             <center>
-                                <button type="button" class="btn btn-success" onclick="invest(5)" style="float:right;"> Invertir </button>
+                                <button type="button" class="invest btn btn-success" onclick="invest(5)"> Invertir </button>
                             </center>
                         </div>
                     </div>
