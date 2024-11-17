@@ -1,7 +1,7 @@
 # DVCAPP
 *Utilización de Blockchain y Smart Contracts en fondos de inversión Venture Capital para pequeños inversores.*
 <br>
-*Repositorio dedicado al desarrollo de una prueba de concepto, para mi Trabajo de Fin de Grado.*
+*Repositorio dedicado al desarrollo de una prueba de concepto para mi Trabajo de Fin de Grado.*
 
 <br>
 
