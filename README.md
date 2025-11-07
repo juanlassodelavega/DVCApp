@@ -55,4 +55,4 @@ npm run dev
 
 ## Autor ✒️
 
-Juan Lasso de la Vega - [@lassete6898](https://github.com/lassete6898)
+Juan Lasso de la Vega - [@juanlassodelavega](https://github.com/juanlassodelavega)
