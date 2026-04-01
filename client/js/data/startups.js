@@ -1,4 +1,4 @@
-window.DVCAppData = {
+export const DVCAppData = {
   appName: 'DVCApp',
   appTagline: 'Decentralized venture capital for early-stage founders and backers.',
   startups: [
@@ -105,3 +105,7 @@ window.DVCAppData = {
     capitalByStartup: [42, 57, 68, 54, 71],
   },
 };
+
+if (typeof window !== 'undefined') {
+  window.DVCAppData = DVCAppData;
+}

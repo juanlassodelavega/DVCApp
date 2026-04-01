@@ -1,9 +1,13 @@
+import DVCApp from './shared.js';
+import { DVCAppData } from './data/startups.js';
+
 const App = {
   contract: null,
   account: null,
   balanceEth: 0,
   startupSelect: null,
   startupCatalog: null,
+  startupPreview: null,
   investmentsList: null,
   accountLabel: null,
   balanceLabel: null,
@@ -15,13 +19,14 @@ const App = {
   init: async () => {
     App.cacheElements();
     App.renderStartupOptions();
-    App.renderStartupCatalog();
-    App.renderFeaturedStartup();
     App.bindGlobalActions();
 
     try {
       await App.loadWallet();
       await App.loadContract();
+      App.renderStartupCatalog();
+      App.renderStartupPreview();
+      App.renderFeaturedStartup();
       await App.renderInvestments();
     } catch (error) {
       App.renderConnectionState(error.message);
@@ -31,6 +36,7 @@ const App = {
   cacheElements: () => {
     App.startupSelect = document.getElementById('startupsSelect');
     App.startupCatalog = document.getElementById('startupCatalog');
+    App.startupPreview = document.getElementById('startupPreview');
     App.investmentsList = document.getElementById('investmentsList');
     App.accountLabel = document.getElementById('account');
     App.balanceLabel = document.getElementById('balance');
@@ -78,9 +84,34 @@ const App = {
 
         App.startupSelect.value = button.dataset.startupSelect;
         App.startupSelect.dispatchEvent(new Event('change'));
+        App.renderStartupPreview();
         document.getElementById('investmentForm')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
+  },
+
+  renderStartupPreview: () => {
+    if (!App.startupPreview || !App.startupSelect) {
+      return;
+    }
+
+    const startup = DVCApp.getStartup(App.startupSelect.value) || DVCAppData.startups[0];
+
+    App.startupPreview.innerHTML = `
+      <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+        <div>
+          <p class="eyebrow mb-1">Ready to invest</p>
+          <h2 class="h4 mb-2">${startup.name}</h2>
+          <p class="mb-0 text-body-secondary">${startup.description}</p>
+        </div>
+        <span class="chip">${startup.targetEth} ETH target</span>
+      </div>
+      <div class="startup-meta mt-3">
+        <span>${startup.location}</span>
+        <span>${startup.teamSize}</span>
+        <span>Founded ${startup.foundingYear}</span>
+      </div>
+    `;
   },
 
   renderFeaturedStartup: () => {
@@ -273,8 +304,7 @@ const App = {
   },
 };
 
-window.App = App;
-window.showReceipt = () => App.openReceipt();
+export default App;
 
 document.addEventListener('DOMContentLoaded', () => {
   App.init();

@@ -1,3 +1,6 @@
+import DVCApp from './shared.js';
+import { DVCAppData } from './data/startups.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const featuredStartup = document.getElementById('featuredStartup');
   const investorList = document.getElementById('investorList');

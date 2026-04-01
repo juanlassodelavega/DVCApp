@@ -1,3 +1,5 @@
+import { DVCAppData } from './data/startups.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSummary();
   renderCharts();

@@ -1,8 +1,7 @@
-(function (global) {
-  const app = (global.DVCApp = global.DVCApp || {});
+const app = {};
 
   app.getStartup = (name) => {
-    const startups = global.DVCAppData?.startups || [];
+    const startups = window.DVCAppData?.startups || [];
     return startups.find((startup) => startup.name === name) || null;
   };
 
@@ -51,12 +50,12 @@
   };
 
   app.getProvider = () => {
-    if (global.ethereum) {
-      return global.ethereum;
+    if (window.ethereum) {
+      return window.ethereum;
     }
 
-    if (global.web3?.currentProvider) {
-      return global.web3.currentProvider;
+    if (window.web3?.currentProvider) {
+      return window.web3.currentProvider;
     }
 
     return null;
@@ -109,7 +108,7 @@
       return;
     }
 
-    const startups = global.DVCAppData?.startups || [];
+    const startups = window.DVCAppData?.startups || [];
     const options = ['<option value="" disabled selected hidden>Select a startup</option>']
       .concat(
         startups.map(
@@ -155,4 +154,8 @@
       </div>
     </article>
   `;
-})(window);
+if (typeof window !== 'undefined') {
+  window.DVCApp = app;
+}
+
+export default app;
