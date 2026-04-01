@@ -18,10 +18,34 @@
  *
  */
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
-//
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+require('dotenv').config();
+
+const { SEPOLIA_RPC_URL, WALLET_MNEMONIC, WALLET_PRIVATE_KEY } = process.env;
+
+const getSepoliaProvider = () => {
+  if (!SEPOLIA_RPC_URL) {
+    throw new Error('Missing SEPOLIA_RPC_URL environment variable.');
+  }
+
+  if (WALLET_MNEMONIC) {
+    return new HDWalletProvider({
+      mnemonic: {
+        phrase: WALLET_MNEMONIC,
+      },
+      providerOrUrl: SEPOLIA_RPC_URL,
+    });
+  }
+
+  if (WALLET_PRIVATE_KEY) {
+    return new HDWalletProvider({
+      privateKeys: [WALLET_PRIVATE_KEY],
+      providerOrUrl: SEPOLIA_RPC_URL,
+    });
+  }
+
+  throw new Error('Missing signer credentials. Set WALLET_MNEMONIC or WALLET_PRIVATE_KEY.');
+};
 
 module.exports = {
   /**
@@ -45,6 +69,13 @@ module.exports = {
      host: "127.0.0.1",     // Localhost (default: none)
      port: 7545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
+    },
+    sepolia: {
+      provider: () => getSepoliaProvider(),
+      network_id: 11155111,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true,
     },
     // Another network with more advanced options...
     // advanced: {

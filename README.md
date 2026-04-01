@@ -23,6 +23,8 @@ npm run dev
 npm run compile
 npm run test
 npm run build:pages
+npm run deploy:sepolia
+npm run publish:pages
 ```
 
 ## Deploy on GitHub Pages
@@ -55,6 +57,37 @@ npm run build:pages
 ### Important blockchain note
 
 If your artifact only contains Ganache (`5777`) addresses, the app will work only against your local chain. For public usage on GitHub Pages, deploy the contract to a public testnet (for example Sepolia), then publish the updated artifact.
+
+## Sepolia Deployment
+
+### 1) Configure environment variables
+
+Create a local `.env` file (do not commit it):
+
+```bash
+SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/YOUR_KEY
+WALLET_PRIVATE_KEY=YOUR_PRIVATE_KEY_WITHOUT_0x
+# Optional alternative instead of private key:
+# WALLET_MNEMONIC="twelve words..."
+```
+
+You only need one signer method: `WALLET_PRIVATE_KEY` or `WALLET_MNEMONIC`.
+
+### 2) Deploy contract to Sepolia
+
+```bash
+npm run deploy:sepolia
+```
+
+### 3) Refresh static artifact for Pages
+
+```bash
+npm run build:pages
+```
+
+### 4) Push to `main`
+
+The GitHub Actions Pages workflow will publish the updated frontend and artifact automatically.
 
 ## Project Structure
 
