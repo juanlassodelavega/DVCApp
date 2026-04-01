@@ -1,131 +1,280 @@
-App = {
-    contracts: {},
-    init: async () => {
-        console.log('Loaded')
-        await App.loadEthereum()
-        await App.loadAccount()
-        await App.loadContracts()
-        App.render()
-        await App.renderInvestments()
-    },
-    // Comprueba si es un navegador Ethereum
-    loadEthereum: async () => {
-        if (window.ethereum) {
-            App.web3Provider = window.ethereum
-            await window.ethereum.request({ method: 'eth_requestAccounts' })
-        } else if (window.web3) {
-            web3 = new Web3(window.web3.currentProvider)
-        } else {
-            console.log('No ethereum browser is installed. Try it installing Metamask')
-        }
-    },
-    // Carga todas las wallets conectadas al navegador
-    loadAccount: async () => {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-        App.account = accounts[0]   // Almacenamos la cuenta
-        var balance = await window.ethereum.request({ method: 'eth_getBalance', params: [App.account, 'latest'] })
-        var parsedBalance = balance/1000000000000000000;
-        App.balance = parsedBalance // Almacenamos el balance de la cuenta
-        console.log(App.balance)
-    },
-    // Permite cargar todos los contratos almacenados en la blockchain
-    loadContracts: async () => {
-        const res = await fetch("InvestmentsContract.json")                       //Traigo el contrato en formato JSON
-        const investmentsContractJSON = await res.json()                          //Traigo el contrato en formato JSON
-        
-        App.contracts.investmentsContract = TruffleContract(investmentsContractJSON)    // Convierto el JSON a Truffle
-        App.contracts.investmentsContract.setProvider(App.web3Provider)                 // Conectamos con MetaMask
-        App.investmentsContract = await App.contracts.investmentsContract.deployed()    // Usamos el contrato desplegado
-    },
-    // Muestra al usuario su cuenta y su balance
-    render: () => {
-        console.log(App.account)
-        document.getElementById('account').innerText = App.account
-        document.getElementById('balance').innerHTML = App.balance + ' ETH';
-    },
-    // Muestra al usuario todas las inversiones que ha realizado
-    renderInvestments: async () => {
-        const investmentCounter = await App.investmentsContract.investmentCounter()
-        const investmentCounterNumber = investmentCounter.toNumber()
+const App = {
+  contract: null,
+  account: null,
+  balanceEth: 0,
+  startupSelect: null,
+  startupCatalog: null,
+  investmentsList: null,
+  accountLabel: null,
+  balanceLabel: null,
+  portfolioCountLabel: null,
+  capitalLabel: null,
+  openCountLabel: null,
+  connectionLabel: null,
 
-        let html = '';
+  init: async () => {
+    App.cacheElements();
+    App.renderStartupOptions();
+    App.renderStartupCatalog();
+    App.renderFeaturedStartup();
+    App.bindGlobalActions();
 
-        for (let i = 1; i <= investmentCounterNumber; i++) {
-            const investment = await App.investmentsContract.investments(i)
-            // const investmentId = investment[0]
-            const investmentTitle = investment[1]
-            const investmentAmount = investment[2]
-            const investmentTime = investment[3]
-            // const investmentDone = investment[4]
-            const investmentCreated = investment[5]
-
-            let investmentElement = `
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card card-body rounded mb-2 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <h3 id="investmentTitle"> ${investmentTitle} </h3>
-                                </div>
-                                <div class="col-md-2">
-                                    <span style="font-weight: bold; float: right;"> Inversión: </span>
-                                    <br>
-                                    <span id="investmentAmount" style="font-weight:lighter; float: right;"> ${investmentAmount} ETH </span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <span id="info"> Has hecho una inversión por ${investmentTime} años. </span>
-                                    <p id="date" class="text-muted">Se creó la transacción ${new Date(investmentCreated * 1000).toLocaleString()}</p>
-                                </div>
-                                <div class="col-md-3">
-                                    <button type="button" class="btn btn-info" style="float:right" onclick="showReceipt()"> Ver transacción </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `
-
-            html += investmentElement;
-        }
-
-        document.querySelector('#investmentsList').innerHTML = html;
-    },
-    // Permite crear una inversión, llamando al Smart Contract
-    createInvestment: async (title, time, amount) => {
-        const result = await App.investmentsContract.createInvestment(title, time, amount, { 
-            from: App.account
-        })
-        location.reload();
-    },
-    // Permite marcar como completada una inversión (no implementado)
-    toggleDone: async (element) => {
-        const investmentId = element.dataset.id;
-
-        await App.investmentsContract.toggleDone(investmentId, {
-            from: App.account
-        })
-
-        location.reload();
+    try {
+      await App.loadWallet();
+      await App.loadContract();
+      await App.renderInvestments();
+    } catch (error) {
+      App.renderConnectionState(error.message);
     }
-}
+  },
 
-// Permite mostrar al usuario el recibo de la transacción (no implementado por completo)
-function showReceipt() {
-    window.open('./docs/receipt.pdf', '_blank');
-    // var title = document.getElementById('title').innerText;
-    // var investmentTitle = document.getElementById("investmentTitle").innerHTML;
-    // var investmentAmount = document.getElementById("investmentAmount").innerHTML;
-    // var info = document.getElementById("info").innerHTML;
-    // var date = document.getElementById("date").innerHTML;
-    
-    // const doc = new jsPDF();
-    // doc.text(title, 10, 10);
-    // doc.text(investmentTitle, 10, 30)
-    // doc.text(investmentAmount, 40, 30)
-    // doc.text(info, 20, 40)
-    // doc.text(date, 20, 50)
-    // doc.save("receipt.pdf");
-}
+  cacheElements: () => {
+    App.startupSelect = document.getElementById('startupsSelect');
+    App.startupCatalog = document.getElementById('startupCatalog');
+    App.investmentsList = document.getElementById('investmentsList');
+    App.accountLabel = document.getElementById('account');
+    App.balanceLabel = document.getElementById('balance');
+    App.portfolioCountLabel = document.getElementById('portfolioCount');
+    App.capitalLabel = document.getElementById('capitalCommitted');
+    App.openCountLabel = document.getElementById('openCommitments');
+    App.connectionLabel = document.getElementById('connectionState');
+  },
+
+  bindGlobalActions: () => {
+    document.querySelectorAll('[data-action="receipt"]').forEach((button) => {
+      button.addEventListener('click', () => App.openReceipt());
+    });
+  },
+
+  renderStartupOptions: () => {
+    if (!App.startupSelect) {
+      return;
+    }
+
+    DVCApp.renderStartupOptions(App.startupSelect);
+  },
+
+  renderStartupCatalog: () => {
+    if (!App.startupCatalog) {
+      return;
+    }
+
+    App.startupCatalog.innerHTML = DVCAppData.startups
+      .map((startup) => `
+        <div class="col-md-6 col-xl-4">
+          ${DVCApp.startupCardMarkup(startup)}
+          <button type="button" class="btn btn-outline-light btn-sm mt-3 w-100" data-startup-select="${startup.name}">
+            Select ${startup.name}
+          </button>
+        </div>
+      `)
+      .join('');
+
+    App.startupCatalog.querySelectorAll('[data-startup-select]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!App.startupSelect) {
+          return;
+        }
+
+        App.startupSelect.value = button.dataset.startupSelect;
+        App.startupSelect.dispatchEvent(new Event('change'));
+        document.getElementById('investmentForm')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  },
+
+  renderFeaturedStartup: () => {
+    const featuredTitle = document.getElementById('featuredStartupTitle');
+    const featuredSummary = document.getElementById('featuredStartupSummary');
+    const featuredDetails = document.getElementById('featuredStartupDetails');
+
+    if (!featuredTitle || !featuredSummary || !featuredDetails) {
+      return;
+    }
+
+    const startup = DVCAppData.featuredStartup;
+    featuredTitle.textContent = startup.name;
+    featuredSummary.textContent = startup.description;
+    featuredDetails.innerHTML = `
+      <li>${startup.stage}</li>
+      <li>${startup.targetEth} ETH target</li>
+      <li>${startup.location}</li>
+      <li>${startup.founderLine}</li>
+      <li>${startup.rationale}</li>
+    `;
+  },
+
+  loadWallet: async () => {
+    const provider = DVCApp.getProvider();
+
+    if (!provider) {
+      throw new Error('MetaMask is required to load wallet data.');
+    }
+
+    const accounts = await DVCApp.requestAccounts();
+    App.account = accounts[0];
+
+    const balanceHex = await provider.request({
+      method: 'eth_getBalance',
+      params: [App.account, 'latest'],
+    });
+
+    App.balanceEth = DVCApp.weiToEth(balanceHex);
+    App.renderWallet();
+  },
+
+  renderWallet: () => {
+    if (App.accountLabel) {
+      App.accountLabel.textContent = App.account || 'Not connected';
+    }
+
+    if (App.balanceLabel) {
+      App.balanceLabel.textContent = DVCApp.formatEth(App.balanceEth);
+    }
+
+    if (App.connectionLabel) {
+      App.connectionLabel.textContent = 'Wallet connected';
+    }
+  },
+
+  renderConnectionState: (message) => {
+    if (App.accountLabel) {
+      App.accountLabel.textContent = 'Wallet unavailable';
+    }
+
+    if (App.balanceLabel) {
+      App.balanceLabel.textContent = '0 ETH';
+    }
+
+    if (App.connectionLabel) {
+      App.connectionLabel.textContent = message;
+    }
+  },
+
+  loadContract: async () => {
+    App.contract = await DVCApp.loadContract();
+  },
+
+  renderInvestments: async () => {
+    if (!App.investmentsList || !App.contract) {
+      return;
+    }
+
+    const totalInvestments = Number(await App.contract.investmentCounter());
+
+    if (App.portfolioCountLabel) {
+      App.portfolioCountLabel.textContent = totalInvestments.toString();
+    }
+
+    if (totalInvestments === 0) {
+      App.investmentsList.innerHTML = `
+        <div class="empty-state">
+          <h3 class="h5 mb-2">No investments yet</h3>
+          <p class="mb-0 text-body-secondary">Pick a startup and submit the first commitment.</p>
+        </div>
+      `;
+
+      if (App.capitalLabel) {
+        App.capitalLabel.textContent = '0 ETH';
+      }
+
+      if (App.openCountLabel) {
+        App.openCountLabel.textContent = '0 open';
+      }
+
+      return;
+    }
+
+    const renderedInvestments = [];
+    let totalCapital = 0;
+    let openCommitments = 0;
+
+    for (let investmentId = 1; investmentId <= totalInvestments; investmentId++) {
+      const investment = await App.contract.investments(investmentId);
+      const startup = DVCApp.getStartup(investment.startup) || { name: investment.startup, targetEth: investment.amount };
+      const amount = Number(investment.amount);
+      totalCapital += Number.isNaN(amount) ? 0 : amount;
+
+      if (!investment.completed) {
+        openCommitments++;
+      }
+
+      renderedInvestments.push(`
+        <article class="investment-card">
+          <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+            <div>
+              <p class="eyebrow mb-1">${startup.sector || 'Portfolio investment'}</p>
+              <h3 class="h5 mb-1">${startup.name}</h3>
+              <p class="mb-0 text-body-secondary">${startup.description || 'Committed capital recorded on-chain.'}</p>
+            </div>
+            <span class="status ${investment.completed ? 'status-closed' : 'status-open'}">${investment.completed ? 'Closed' : 'Open'}</span>
+          </div>
+          <div class="investment-card__meta">
+            <span><strong>Amount:</strong> ${DVCApp.formatEth(investment.amount)}</span>
+            <span><strong>Duration:</strong> ${investment.duration}</span>
+            <span><strong>Created:</strong> ${DVCApp.formatDate(investment.createdAt)}</span>
+          </div>
+          <div class="d-flex gap-2 flex-wrap mt-3">
+            <button type="button" class="btn btn-light btn-sm" data-action="receipt">View receipt</button>
+            <button type="button" class="btn btn-outline-light btn-sm" data-toggle-investment="${investment.id}">
+              ${investment.completed ? 'Reopen' : 'Close'} investment
+            </button>
+          </div>
+        </article>
+      `);
+    }
+
+    App.investmentsList.innerHTML = renderedInvestments.join('');
+
+    if (App.capitalLabel) {
+      App.capitalLabel.textContent = DVCApp.formatEth(totalCapital);
+    }
+
+    if (App.openCountLabel) {
+      App.openCountLabel.textContent = `${openCommitments} open`;
+    }
+
+    App.investmentsList.querySelectorAll('[data-action="receipt"]').forEach((button) => {
+      button.addEventListener('click', () => App.openReceipt());
+    });
+
+    App.investmentsList.querySelectorAll('[data-toggle-investment]').forEach((button) => {
+      button.addEventListener('click', () => App.toggleDone(button.dataset.toggleInvestment));
+    });
+  },
+
+  createInvestment: async (startup, duration, amount) => {
+    if (!App.contract) {
+      throw new Error('The contract is not connected.');
+    }
+
+    await App.contract.createInvestment(startup, duration, amount, {
+      from: App.account,
+    });
+
+    await App.renderInvestments();
+  },
+
+  toggleDone: async (investmentId) => {
+    if (!App.contract) {
+      return;
+    }
+
+    await App.contract.toggleDone(investmentId, {
+      from: App.account,
+    });
+
+    await App.renderInvestments();
+  },
+
+  openReceipt: () => {
+    window.open('./docs/receipt.pdf', '_blank', 'noopener');
+  },
+};
+
+window.App = App;
+window.showReceipt = () => App.openReceipt();
+
+document.addEventListener('DOMContentLoaded', () => {
+  App.init();
+});

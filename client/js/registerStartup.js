@@ -1,9 +1,16 @@
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('registerStartupButton')?.addEventListener('click', register);
+});
+
 function register() {
-    swal(
-        "¡Registrado correctamente!", 
-        "Introduzca sus credenciales de inicio de sesión", 
-        "success"
-        ).then(function() {
-        window.location = "index.html";
-    });
+  Swal.fire({
+    title: 'Startup registration complete',
+    text: 'Your startup profile is ready to be reviewed.',
+    icon: 'success',
+    confirmButtonText: 'Back to login',
+  }).then(() => {
+    window.location = 'index.html';
+  });
 }
+
+window.register = register;

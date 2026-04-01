@@ -1,121 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/main.css">
-    <title>DVCApp</title>
-    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DVCApp | Startup dashboard</title>
+  <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
-    <div class="container py-5">
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="users card card-body rounded mb-4 bg-dark">
-                    <h1> DVCApp </h1>
-                    <h6 class="text-muted"> Aplicación de Venture Capital Descentralizada </h6>
-                    <hr>
-                    <span id="wallet-text">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet2" viewBox="0 0 16 16">
-                            <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"></path>
-                        </svg>
-                        Cartera
-                    </span>
-                    <span id="account"></span>
-                    <span id="balance-text">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z" />
-                            <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z" />
-                            <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z" />
-                            <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z" />
-                        </svg>
-                        Saldo
-                    </span>
-                    <span id="balance"></span>
-                </div>
-                <div class="card card-body rounded bg-dark mb-4" id="investmentForm">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h4> Wallbox </h4>
-                        </div>
-                        <div class="col-md-2">
-                            <a onclick="edit()" id="edit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span id="info-text"> Capital necesario: </span>
-                            <span id="info-amount"> 20 ETH </span>
-                        </div>
-                        <span id="info-text"> Descripción: </span>
-                        <span id="info-amount" align="justify">
-                            Esta compañía cuenta con una trayectoria de 6 años, durante la cual se ha convertido en un referente en el mercado de puntos de carga para coches eléctricos. Es una de las cuatro startups españolas en alcanzar la clasificación de unicornio, superando la barrera de los 1.000 millones de dólares de valoración poco antes de su salida a la bolsa en Junio de 2021. 
-                            Esta empresa fundada por Enric Asunción y Eduard Castañeda cuenta con una plantilla de 660 empleados, desplegados en sus 3 fábricas, dos en España y una en China, a partir de las cuales ha logrado establecer su presencia en más de 67 países, facturando para el primer semestre del año un estimado de 32 millones de dólares, unos 27,4 millones de euros.
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="graph card card-body rounded mb-4 bg-dark">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h1> Mis inversionistas </h1>
-                            <!-- <h6 class="text-muted"> Wallbox </h6> -->
-                        </div>
-                        <div class="col-md-2">
-                            <a href="index.html" id="logout">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="graph card card-body rounded mb-2 bg-dark">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <h3 id="info"> Juan Lasso de la Vega Ruiz-Fornells </h3>
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="button" class="btn btn-danger" onclick="cancel()"> Cancelar </button>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <p>
-                                    Se realizó una inversión de 1ETH el día 10 de abril de 2022, por 3 años.
-                                    <br>
-                                    La inversión finalizará el día 10 de abril de 2025.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <main class="app-shell">
+    <div class="container">
+      <section class="surface hero-panel mb-4">
+        <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+          <div>
+            <p class="eyebrow">Startup workspace</p>
+            <h1 class="display-6 mb-3">Investor relations and profile management.</h1>
+            <p class="lead text-body-secondary mb-0">
+              Review your startup profile, keep track of backers, and manage the narrative from one polished dashboard.
+            </p>
+          </div>
+          <div class="d-flex gap-2 flex-wrap">
+            <button type="button" class="btn btn-outline-light btn-sm" id="editStartup">Edit profile</button>
+            <button type="button" class="btn btn-outline-warning btn-sm" id="cancelInvestment">Close commitment</button>
+            <a href="index.html" class="btn btn-outline-light btn-sm">Sign out</a>
+          </div>
         </div>
+        <div class="row g-3 mt-4">
+          <div class="col-md-4">
+            <div class="metric-card">
+              <span class="metric-label">Wallet</span>
+              <strong id="account" class="metric-value">Not connected</strong>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="metric-card">
+              <span class="metric-label">Balance</span>
+              <strong id="balance" class="metric-value">0 ETH</strong>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="metric-card">
+              <span class="metric-label">Connection</span>
+              <strong id="connectionState" class="metric-value">Waiting for wallet</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <section class="surface p-4 h-100">
+            <p class="eyebrow mb-1">Featured startup</p>
+            <div id="featuredStartup"></div>
+          </section>
+        </div>
+        <div class="col-lg-8">
+          <section class="surface p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-4">
+              <div>
+                <p class="eyebrow mb-1">Investors</p>
+                <h2 class="h4 mb-0">Active commitments</h2>
+              </div>
+            </div>
+            <div id="investorList" class="vstack gap-3"></div>
+          </section>
+        </div>
+      </div>
     </div>
+  </main>
 
-    <!-- Scripts -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <script src="./libs/@truffle/contract/dist/truffle-contract.min.js"></script>
-    <script src="./js/app.js"></script>
-    <script src="./js/ui.js"></script>
-    <script src="./js/investors.js"></script>
+  <script src="./libs/@truffle/contract/dist/truffle-contract.min.js"></script>
+  <script src="./js/data/startups.js"></script>
+  <script src="./js/shared.js"></script>
+  <script src="./js/app.js"></script>
+  <script src="./js/investors.js"></script>
 </body>
-
 </html>

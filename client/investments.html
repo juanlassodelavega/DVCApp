@@ -1,249 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/main.css">
-    <title>DVCApp</title>
-    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DVCApp | Portfolio</title>
+  <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <div class="container py-5">
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="users card card-body rounded mb-4 bg-dark">
-                    <h1 id="title"> DVCApp </h1>
-                    <h6 class="text-muted"> Aplicación de Venture Capital Descentralizada </h6>
-                    <hr>
-                    <span id="wallet-text">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet2" viewBox="0 0 16 16">
-                            <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"></path>
-                        </svg> 
-                        Cartera 
-                    </span>
-                    <span id="account"></span>
-                    <span id="balance-text">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
-                            <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
-                            <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"/>
-                            <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
-                          </svg>
-                        Saldo
-                    </span>
-                    <span id="balance"></span>
-                </div>
-                <form class="card card-body rounded bg-dark" id="investmentForm">
-                    <h4> Haga una Transacción </h4>
-                    <hr>
-                    <div class="form-group">
-                        <select class="form-control bg-dark text-white rounded mt-2" id="startupsSelect" onchange="info()">
-                            <option value="" disabled selected hidden> Seleccione una Startup </option>
-                            <option value="Heura Foods"> Heura Foods </option>
-                            <option value="ThePowerMBA"> ThePowerMBA </option>
-                            <option value="Wallbox"> Wallbox </option>
-                            <option value="Colvin"> Colvin </option>
-                            <option value="Freshly Cosmetics"> Freshly Cosmetics </option>
-                        </select>
-                    </div>
-                    <input type="number" name="amount" id="amount" placeholder="¿Cuántos ETH quieres invertir?" class="form-control bg-dark text-white rounded mt-4 amount" min="0" step="0.1" required>
-                    <input type="number" name="time" id="time" placeholder="¿Por cuánto tiempo quieres hacer la inversión?" class="form-control bg-dark text-white rounded my-4 time" min="0" required>
-                    <button class="btn btn-primary"> Guardar </button>
-                </form>
-            </div>
-            <div class="col-md-8">
-                <div class="graph card card-body rounded mb-2 bg-dark">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h1> Mis inversiones </h1>
-                        </div>
-                        <div class="col-md-2">
-                            <a href="index.html" id="logout">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                                </svg>
-                            </a>
-                            <a onclick="edit()" id="edit">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <h6 class="text-muted"> Juan Lasso de la Vega Ruiz-Fornells </h6>
-                </div>
-                <div id ="investmentsList"></div> 
-            </div>
+  <main class="app-shell">
+    <div class="container">
+      <section class="surface hero-panel mb-4">
+        <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+          <div class="hero-copy">
+            <p class="eyebrow">Investor workspace</p>
+            <h1 class="display-6 mb-3">Build and monitor your portfolio.</h1>
+            <p class="lead text-body-secondary mb-0">
+              Connect your wallet, choose a startup, and keep every commitment visible on-chain.
+            </p>
+          </div>
+          <div class="d-flex gap-2 flex-wrap">
+            <a href="index.html" class="btn btn-outline-light btn-sm">Sign out</a>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="graph card card-body rounded mb-2 bg-dark">
-                    <h1> Startups </h1>
-                    <h6 class="text-muted"> ¡Analice las startups en invierta! </h6>
-                </div>
+        <div class="row g-3 mt-4">
+          <div class="col-md-4">
+            <div class="metric-card">
+              <span class="metric-label">Wallet</span>
+              <strong id="account" class="metric-value">Not connected</strong>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="graph card card-body rounded mb-2 bg-dark">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h3> Heura Foods </h3>
-                        </div>
-                        <div class="col-md-2">
-                            <span id="eth-text"> Capital necesario: </span>
-                            <br>
-                            <span id="eth"> 10 ETH </span> 
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <p align="justify"> 
-                                Esta es una empresa centrada en ofrecer una alternativa a la proteína animal, ofreciendo soluciones alimenticias para una dieta 100% sostenible de origen vegetal. Con sede en Barcelona, esta compañía fundada en 2017 cuenta con una plantilla de 75 empleados a tiempo completo y recientemente ha levantado una ronda de inversión de 16 millones de euros, que servirá para apoyar su búsqueda por conseguir un mundo donde los animales ya no formen parte de la cadena de suministro, gracias a su carne de origen vegetal.
-                            </p>
-                        </div>
-                        <div class="col-md-2">
-                            <center>
-                                <button type="button" class="invest btn btn-success" onclick="invest(1)"> Invertir </button>
-                            </center>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="col-md-4">
+            <div class="metric-card">
+              <span class="metric-label">Balance</span>
+              <strong id="balance" class="metric-value">0 ETH</strong>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="graph card card-body rounded mb-2 bg-dark">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h3> ThePowerMBA </h3>
-                        </div>
-                        <div class="col-md-2">
-                            <span id="eth-text"> Capital necesario: </span>
-                            <br>
-                            <span id="eth"> 15 ETH </span> 
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <p align="justify"> 
-                                La formación profesional en el ámbito digital es un aspecto que ha tomado mayor importancia en este último año, como un canal de adaptación y crecimiento dentro de esta nueva era de transición digital. Dentro de las diferentes plataformas de este tipo encontramos The Power MBA, una startup de formación profesional que cuenta actualmente con más de 65.000 estudiantes a lo largo de 9 países, y una plantilla de 170 trabajadores.
-                                Con una trayectoria de 4 años desde su fundación en 2017, esta empresa busca ofrecer una alternativa más accesible y adecuada a los medios digitales para el desarrollo de los nuevos profesionales. Entre sus cursos, podemos encontrar másteres en diferentes áreas como Marketing digital, eCommerce y Liderazgo, así como certificaciones en la gestión de anuncios en Instagram, Facebook y Google.
-                            </p>
-                        </div>
-                        <div class="col-md-2">
-                            <center>
-                                <button type="button" class="invest btn btn-success" onclick="invest(2)"> Invertir </button>
-                            </center>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="col-md-4">
+            <div class="metric-card">
+              <span class="metric-label">Connection</span>
+              <strong id="connectionState" class="metric-value">Waiting for wallet</strong>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="graph card card-body rounded mb-2 bg-dark">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h3> Wallbox </h3>
-                        </div>
-                        <div class="col-md-2">
-                            <span id="eth-text"> Capital necesario: </span>
-                            <br>
-                            <span id="eth"> 20 ETH </span> 
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <p align="justify"> 
-                                Esta compañía cuenta con una trayectoria de 6 años, durante la cual se ha convertido en un referente en el mercado de puntos de carga para coches eléctricos. Es una de las cuatro startups españolas en alcanzar la clasificación de unicornio, superando la barrera de los 1.000 millones de dólares de valoración poco antes de su salida a la bolsa en Junio de 2021. 
-                                Esta empresa fundada por Enric Asunción y Eduard Castañeda cuenta con una plantilla de 660 empleados, desplegados en sus 3 fábricas, dos en España y una en China, a partir de las cuales ha logrado establecer su presencia en más de 67 países, facturando para el primer semestre del año un estimado de 32 millones de dólares, unos 27,4 millones de euros.
-                            </p>
-                        </div>
-                        <div class="col-md-2">
-                            <center>
-                                <button type="button" class="invest btn btn-success" onclick="invest(3)"> Invertir </button>
-                            </center>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="col-md-4">
+            <div class="metric-card">
+              <span class="metric-label">Portfolio entries</span>
+              <strong id="portfolioCount" class="metric-value">0</strong>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="graph card card-body rounded mb-2 bg-dark">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h3> Colvin </h3>
-                        </div>
-                        <div class="col-md-2">
-                            <span id="eth-text"> Capital necesario: </span>
-                            <br>
-                            <span id="eth"> 25 ETH </span> 
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <p align="justify"> 
-                                Fundada en 2017, Colvin es una plataforma dedicada al negocio de la venta de flores, con un modelo de trabajo particular. Esta plataforma, de alcance internacional, busca eliminar los intermediarios, es decir, el proceso de suministro entre los floricultores y el consumidor final, en orden de garantizar la calidad de los productos, mejores precios y un proceso de suministro más eficiente. De esta manera, la startup barcelonesa con una plantilla de 199 empleados, cumple como una plataforma de cadena de suministro en sí misma.
-                            </p>
-                        </div>
-                        <div class="col-md-2">
-                            <center>
-                                <button type="button" class="invest btn btn-success" onclick="invest(4)"> Invertir </button>
-                            </center>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="col-md-4">
+            <div class="metric-card">
+              <span class="metric-label">Committed capital</span>
+              <strong id="capitalCommitted" class="metric-value">0 ETH</strong>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="graph card card-body rounded mb-2 bg-dark">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h3> Freshly Cosmetics </h3>
-                        </div>
-                        <div class="col-md-2">
-                            <span id="eth-text"> Capital necesario: </span>
-                            <br>
-                            <span id="eth"> 30 ETH </span> 
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <p align="justify"> 
-                                Este eCommerce de productos cosméticos tiene su sede en Reus, Tarragona donde funciona desde su creación en 2016. Fundada por los químicos Mireia Trepat, Joan Miralles y Miquel Antolín, esta compañía se ha ganado una posición en el mercado de la belleza gracias a sus productos de cosmética natural. Así mismo destaca su presencia en redes sociales, donde incluso han trabajado de la mano con TikTok para impulsar su negocio.
-                            </p>
-                        </div>
-                        <div class="col-md-2">
-                            <center>
-                                <button type="button" class="invest btn btn-success" onclick="invest(5)"> Invertir </button>
-                            </center>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="col-md-4">
+            <div class="metric-card">
+              <span class="metric-label">Open commitments</span>
+              <strong id="openCommitments" class="metric-value">0 open</strong>
             </div>
+          </div>
         </div>
-    </div>
+      </section>
 
-    <!-- Scripts -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <script src="./libs/@truffle/contract/dist/truffle-contract.min.js"></script>
-    <script src="./js/app.js"></script>
-    <script src="./js/ui.js"></script>
-    <script src="./js/investments.js"></script>
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <section class="surface p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+              <div>
+                <p class="eyebrow mb-1">Commit capital</p>
+                <h2 class="h4 mb-0">Create investment</h2>
+              </div>
+              <span class="chip">On-chain</span>
+            </div>
+            <form id="investmentForm" class="vstack gap-3">
+              <div>
+                <label class="form-label" for="startupsSelect">Startup</label>
+                <select class="form-select" id="startupsSelect"></select>
+              </div>
+              <div>
+                <label class="form-label" for="amount">Amount in ETH</label>
+                <input type="number" name="amount" id="amount" class="form-control" placeholder="0.0" min="0" step="0.1" required>
+              </div>
+              <div>
+                <label class="form-label" for="time">Duration</label>
+                <input type="text" name="time" id="time" class="form-control" placeholder="24 months" required>
+              </div>
+              <button class="btn btn-primary w-100" type="submit">Save investment</button>
+            </form>
+          </section>
+
+          <section class="surface p-4" id="startupPreview">
+            <p class="eyebrow mb-1">Ready to invest</p>
+            <p class="mb-0 text-body-secondary">Select a startup to preview its profile.</p>
+          </section>
+        </div>
+
+        <div class="col-lg-8">
+          <section class="surface p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-3">
+              <div>
+                <p class="eyebrow mb-1">Portfolio</p>
+                <h2 class="h4 mb-0">Your commitments</h2>
+              </div>
+              <button type="button" class="btn btn-outline-light btn-sm" data-action="receipt">Open receipt</button>
+            </div>
+            <div id="investmentsList" class="vstack gap-3"></div>
+          </section>
+
+          <section class="surface p-4">
+            <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-4">
+              <div>
+                <p class="eyebrow mb-1">Startup pipeline</p>
+                <h2 class="h4 mb-0">Available opportunities</h2>
+              </div>
+            </div>
+            <div id="startupCatalog" class="row g-3"></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="./libs/@truffle/contract/dist/truffle-contract.min.js"></script>
+  <script src="./js/data/startups.js"></script>
+  <script src="./js/shared.js"></script>
+  <script src="./js/app.js"></script>
+  <script src="./js/investments.js"></script>
 </body>
 </html>

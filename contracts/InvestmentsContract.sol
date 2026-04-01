@@ -1,50 +1,53 @@
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.6;
 
-// Deifinimos el contrato con todas sus funcionalidades
 contract InvestmentsContract {
+    uint256 public investmentCounter;
 
-    // Inicializamos el contador a 0
-    uint public investmentCounter = 0;
-
-    // Alamcenamos los argumentos para el contrato
     event InvestmentCreated(
-        uint id,
-        string title,
+        uint256 id,
+        string startup,
         string amount,
-        string time,
-        bool done,
-        uint createdAt
+        string duration,
+        bool completed,
+        uint256 createdAt
     );
 
-    // Almacenamos los argumentos para ToggleDone
-    event InvestmentToggleDone(uint id, bool done);
+    event InvestmentToggled(uint256 id, bool completed);
 
-    // Creamos un tipo de dato con su respectiva estructura
     struct Investment {
         uint256 id;
-        string title;
+        string startup;
         string amount;
-        string time;
-        bool done;
+        string duration;
+        bool completed;
         uint256 createdAt;
     }
 
-    // Creamos un "diccionario" con la información de la inversión
     mapping (uint256 => Investment) public investments;
 
-    // Funcion que permite crear una inversión en la blockchain
-    function createInvestment(string memory _title, string memory _time, string memory _amount) public {
+    function createInvestment(string memory _startup, string memory _duration, string memory _amount) public {
+        require(bytes(_startup).length > 0, "Startup name is required");
+        require(bytes(_duration).length > 0, "Investment duration is required");
+        require(bytes(_amount).length > 0, "Investment amount is required");
+
         investmentCounter++;
-        investments[investmentCounter] = Investment(investmentCounter, _title, _amount, _time, true, block.timestamp);
-        emit InvestmentCreated(investmentCounter, _title, _amount, _time, true, block.timestamp);
+        investments[investmentCounter] = Investment(
+            investmentCounter,
+            _startup,
+            _amount,
+            _duration,
+            false,
+            block.timestamp
+        );
+
+        emit InvestmentCreated(investmentCounter, _startup, _amount, _duration, false, block.timestamp);
     }
 
-    // Funcion que permite marcar como completado en la blockchain (no implementado)
-    function toggleDone(uint _id) public {
-        Investment memory _investment = investments[_id];
-        _investment.done = !_investment.done;
-        investments[_id] = _investment;
-        emit InvestmentToggleDone(_id, _investment.done);
+    function toggleDone(uint256 _id) public {
+        Investment storage investment = investments[_id];
+        require(investment.id != 0, "Investment not found");
+
+        investment.completed = !investment.completed;
+        emit InvestmentToggled(_id, investment.completed);
     }
 }

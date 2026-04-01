@@ -1,9 +1,16 @@
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('resetButton')?.addEventListener('click', reset);
+});
+
 function reset() {
-    swal(
-        "Correo de restablecimiento de contraseña enviado", 
-        "Sigue las instrucciones para restablecer la contraseña", 
-        "success"
-        ).then(function() {
-        window.location = "index.html";
-    });
+  Swal.fire({
+    title: 'Reset email sent',
+    text: 'Follow the instructions in your inbox to create a new password.',
+    icon: 'success',
+    confirmButtonText: 'Back to login',
+  }).then(() => {
+    window.location = 'index.html';
+  });
 }
+
+window.reset = reset;

@@ -1,14 +1,21 @@
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('registerButton')?.addEventListener('click', register);
+});
+
 function register() {
-    if (document.getElementById("flexCheckDefault").checked) {
-        window.location = "registerStartup.html";
-        return true;
-    }
-    swal(
-        "¡Registrado correctamente!", 
-        "Introduzca sus credenciales de inicio de sesión", 
-        "success"
-        ).then(function() {
-        window.location = "index.html";
-    });
-    return false;
+  if (document.getElementById('isStartup')?.checked) {
+    window.location = 'registerStartup.html';
+    return;
+  }
+
+  Swal.fire({
+    title: 'Registration complete',
+    text: 'You can now sign in with your new credentials.',
+    icon: 'success',
+    confirmButtonText: 'Go to login',
+  }).then(() => {
+    window.location = 'index.html';
+  });
 }
+
+window.register = register;

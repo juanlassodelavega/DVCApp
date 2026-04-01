@@ -1,58 +1,51 @@
-# DVCAPP
-*Utilización de Blockchain y Smart Contracts en fondos de inversión Venture Capital para pequeños inversores.*
-<br>
-*Repositorio dedicado al desarrollo de una prueba de concepto para mi Trabajo de Fin de Grado.*
+# DVCApp
 
-<br>
+DVCApp is a decentralized venture capital demo built with Truffle, Solidity, Bootstrap, and MetaMask. It lets users explore a portfolio-style investor flow, a startup workspace, and an admin dashboard from the same codebase.
 
-## Requisitos 📋
+## Requirements
 
-*Instalación de Truffle:*
-```bash
-npm install -g truffle
-```
+- Node.js and npm
+- Truffle
+- Ganache
+- MetaMask
 
-*Instalación de Ganache:*
-```bash
-https://trufflesuite.com/ganache/
-```
+## Setup
 
-*Instalación de MetaMask:*
-```bash
-https://metamask.io/download/
-```
-
-<br>
-
-## Configuración del entorno ⚙️
-
-*Instalación de dependencias:*
 ```bash
 npm install
-```
-
-*Ejecución de migraciones desde el principio:*
-```bash
 truffle migrate --reset
-```
-
-*Ejecución del proyecto en modo desarrollador:*
-```bash
 npm run dev
 ```
 
-<br>
+## Useful Commands
 
-## Construido con 🛠️
+```bash
+npm run compile
+npm run test
+```
 
-- [Truffle Suite](https://trufflesuite.com) - Framework de desarrollo para Blockchain
-- [Bootstrap](https://getbootstrap.com) - Biblioteca de estilos web
-- [Ganache](https://trufflesuite.com/ganache/) - Blockchain de Ethereum
-- [MetaMask](https://metamask.io) - Wallet de criptomonedas
-- [Chart.js](https://www.chartjs.org/) - Biblioteca para la visualización de datos
+## Project Structure
 
-<br>
+- `contracts/` contains the Solidity smart contract.
+- `migrations/` contains the deployment script.
+- `client/` contains the static app, styles, and page scripts.
+- `test/` contains the Truffle tests.
 
-## Autor ✒️
+## Notes
+
+- The investor dashboard lives in `client/investments.html`.
+- The startup workspace lives in `client/investors.html`.
+- The admin dashboard lives in `client/admin.html`.
+- Shared startup data is in `client/js/data/startups.js`.
+
+## Built With
+
+- Truffle Suite
+- Solidity
+- Bootstrap 5
+- Chart.js
+- SweetAlert2
+
+## Author
 
 Juan Lasso de la Vega - [@juanlassodelavega](https://github.com/juanlassodelavega)
