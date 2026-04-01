@@ -17,6 +17,8 @@
     })} ETH`;
   };
 
+  app.formatWeiAsEth = (weiValue) => app.formatEth(app.weiToEth(weiValue));
+
   app.formatDate = (timestamp) =>
     new Date(Number(timestamp) * 1000).toLocaleString('en-US', {
       dateStyle: 'medium',
@@ -31,6 +33,21 @@
     }
 
     return Number(weiString) / 1e18;
+  };
+
+  app.ethToWei = (ethValue) => {
+    const normalizedValue = String(ethValue).trim();
+
+    if (!normalizedValue) {
+      return '0';
+    }
+
+    const [wholePart, fractionalPart = ''] = normalizedValue.split('.');
+    const paddedFraction = `${fractionalPart}000000000000000000`.slice(0, 18);
+    const wholeWei = BigInt(wholePart || '0') * 1000000000000000000n;
+    const fractionWei = BigInt(paddedFraction || '0');
+
+    return (wholeWei + fractionWei).toString();
   };
 
   app.getProvider = () => {

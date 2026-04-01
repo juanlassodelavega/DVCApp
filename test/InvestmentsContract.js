@@ -18,7 +18,9 @@ contract("InvestmentsContract", () => {
         const result = await this.investmentsContract.createInvestment(
             'Heura Foods',
             '24 months',
-            '10'
+            {
+                value: web3.utils.toWei('10', 'ether'),
+            }
         );
         const investmentEvent = result.logs[0].args;
         const investmentCounter = await this.investmentsContract.investmentCounter();
@@ -27,12 +29,12 @@ contract("InvestmentsContract", () => {
         assert.equal(investmentCounter.toNumber(), 1);
         assert.equal(investment.id.toNumber(), 1);
         assert.equal(investment.startup, 'Heura Foods');
-        assert.equal(investment.amount, '10');
+        assert.equal(investment.amountWei.toString(), web3.utils.toWei('10', 'ether'));
         assert.equal(investment.duration, '24 months');
         assert.equal(investment.completed, false);
         assert.equal(investmentEvent.id.toNumber(), 1);
         assert.equal(investmentEvent.startup, 'Heura Foods');
-        assert.equal(investmentEvent.amount, '10');
+        assert.equal(investmentEvent.amountWei.toString(), web3.utils.toWei('10', 'ether'));
         assert.equal(investmentEvent.duration, '24 months');
         assert.equal(investmentEvent.completed, false);
     });

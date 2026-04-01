@@ -191,8 +191,8 @@ const App = {
 
     for (let investmentId = 1; investmentId <= totalInvestments; investmentId++) {
       const investment = await App.contract.investments(investmentId);
-      const startup = DVCApp.getStartup(investment.startup) || { name: investment.startup, targetEth: investment.amount };
-      const amount = Number(investment.amount);
+      const startup = DVCApp.getStartup(investment.startup) || { name: investment.startup, targetEth: DVCApp.weiToEth(investment.amountWei) };
+      const amount = Number(DVCApp.weiToEth(investment.amountWei));
       totalCapital += Number.isNaN(amount) ? 0 : amount;
 
       if (!investment.completed) {
@@ -210,7 +210,7 @@ const App = {
             <span class="status ${investment.completed ? 'status-closed' : 'status-open'}">${investment.completed ? 'Closed' : 'Open'}</span>
           </div>
           <div class="investment-card__meta">
-            <span><strong>Amount:</strong> ${DVCApp.formatEth(investment.amount)}</span>
+            <span><strong>Amount:</strong> ${DVCApp.formatWeiAsEth(investment.amountWei)}</span>
             <span><strong>Duration:</strong> ${investment.duration}</span>
             <span><strong>Created:</strong> ${DVCApp.formatDate(investment.createdAt)}</span>
           </div>
@@ -248,8 +248,9 @@ const App = {
       throw new Error('The contract is not connected.');
     }
 
-    await App.contract.createInvestment(startup, duration, amount, {
+    await App.contract.createInvestment(startup, duration, {
       from: App.account,
+      value: DVCApp.ethToWei(amount),
     });
 
     await App.renderInvestments();

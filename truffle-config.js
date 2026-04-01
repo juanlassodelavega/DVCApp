@@ -18,12 +18,27 @@
  *
  */
 
-const HDWalletProvider = require('@truffle/hdwallet-provider');
-require('dotenv').config();
+let HDWalletProvider;
+
+try {
+  HDWalletProvider = require('@truffle/hdwallet-provider');
+} catch (error) {
+  HDWalletProvider = null;
+}
+
+try {
+  require('dotenv').config();
+} catch (error) {
+  // Optional in this workspace.
+}
 
 const { SEPOLIA_RPC_URL, WALLET_MNEMONIC, WALLET_PRIVATE_KEY } = process.env;
 
 const getSepoliaProvider = () => {
+  if (!HDWalletProvider) {
+    throw new Error('Install @truffle/hdwallet-provider to enable the Sepolia network.');
+  }
+
   if (!SEPOLIA_RPC_URL) {
     throw new Error('Missing SEPOLIA_RPC_URL environment variable.');
   }

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.6;
 
 contract InvestmentsContract {
@@ -6,7 +7,7 @@ contract InvestmentsContract {
     event InvestmentCreated(
         uint256 id,
         string startup,
-        string amount,
+        uint256 amountWei,
         string duration,
         bool completed,
         uint256 createdAt
@@ -17,7 +18,7 @@ contract InvestmentsContract {
     struct Investment {
         uint256 id;
         string startup;
-        string amount;
+        uint256 amountWei;
         string duration;
         bool completed;
         uint256 createdAt;
@@ -25,22 +26,22 @@ contract InvestmentsContract {
 
     mapping (uint256 => Investment) public investments;
 
-    function createInvestment(string memory _startup, string memory _duration, string memory _amount) public {
+    function createInvestment(string memory _startup, string memory _duration) public payable {
         require(bytes(_startup).length > 0, "Startup name is required");
         require(bytes(_duration).length > 0, "Investment duration is required");
-        require(bytes(_amount).length > 0, "Investment amount is required");
+        require(msg.value > 0, "Investment amount is required");
 
         investmentCounter++;
         investments[investmentCounter] = Investment(
             investmentCounter,
             _startup,
-            _amount,
+            msg.value,
             _duration,
             false,
             block.timestamp
         );
 
-        emit InvestmentCreated(investmentCounter, _startup, _amount, _duration, false, block.timestamp);
+        emit InvestmentCreated(investmentCounter, _startup, msg.value, _duration, false, block.timestamp);
     }
 
     function toggleDone(uint256 _id) public {
