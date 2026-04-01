@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "lite-server",
     "compile": "npx truffle compile",
-    "test": "npx truffle test"
+    "test": "npx truffle test",
+    "prepare:pages": "mkdir -p client && cp build/contracts/InvestmentsContract.json client/InvestmentsContract.json",
+    "build:pages": "npm run prepare:pages"
   },
   "keywords": [],
   "author": "",
